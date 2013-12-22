@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>DeckOfCards.xcscheme</key>
+		<key>CardDealer.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4EF7F2A6185FD04200DC2509</key>
+		<key>4EFCFC9F1866605D00960DB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4EFCFCC01866605E00960DB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

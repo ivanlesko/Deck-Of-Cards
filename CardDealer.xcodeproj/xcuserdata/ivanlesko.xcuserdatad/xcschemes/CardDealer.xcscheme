@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4EF7F2A6185FD04200DC2509"
-               BuildableName = "DeckOfCards"
-               BlueprintName = "DeckOfCards"
-               ReferencedContainer = "container:DeckOfCards.xcodeproj">
+               BlueprintIdentifier = "4EFCFC9F1866605D00960DB3"
+               BuildableName = "CardDealer.app"
+               BlueprintName = "CardDealer"
+               ReferencedContainer = "container:CardDealer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,14 +28,24 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4EFCFCC01866605E00960DB3"
+               BuildableName = "CardDealerTests.xctest"
+               BlueprintName = "CardDealerTests"
+               ReferencedContainer = "container:CardDealer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF7F2A6185FD04200DC2509"
-            BuildableName = "DeckOfCards"
-            BlueprintName = "DeckOfCards"
-            ReferencedContainer = "container:DeckOfCards.xcodeproj">
+            BlueprintIdentifier = "4EFCFC9F1866605D00960DB3"
+            BuildableName = "CardDealer.app"
+            BlueprintName = "CardDealer"
+            ReferencedContainer = "container:CardDealer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +61,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF7F2A6185FD04200DC2509"
-            BuildableName = "DeckOfCards"
-            BlueprintName = "DeckOfCards"
-            ReferencedContainer = "container:DeckOfCards.xcodeproj">
+            BlueprintIdentifier = "4EFCFC9F1866605D00960DB3"
+            BuildableName = "CardDealer.app"
+            BlueprintName = "CardDealer"
+            ReferencedContainer = "container:CardDealer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +79,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF7F2A6185FD04200DC2509"
-            BuildableName = "DeckOfCards"
-            BlueprintName = "DeckOfCards"
-            ReferencedContainer = "container:DeckOfCards.xcodeproj">
+            BlueprintIdentifier = "4EFCFC9F1866605D00960DB3"
+            BuildableName = "CardDealer.app"
+            BlueprintName = "CardDealer"
+            ReferencedContainer = "container:CardDealer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

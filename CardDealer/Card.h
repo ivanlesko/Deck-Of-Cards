@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Card : NSObject
+@interface Card : UIView
 
 @property (nonatomic, strong) NSString *suit;
 @property (nonatomic, strong) NSString *rank;
 
+@property (nonatomic, strong) UILabel *suitLabel;
+@property (nonatomic, strong) UILabel *rankLabel;
+
 - (id)initWithRank:(NSString *)theRank andSuit:(NSString *)theSuit;
+
+- (void)drawRect:(CGRect)rect;
 
 @end
