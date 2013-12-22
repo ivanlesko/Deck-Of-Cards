@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *rank;
 
 @property (nonatomic, strong) UILabel *suitLabel;
-@property (nonatomic, strong) UILabel *rankLabel;
+@property (nonatomic, strong) UIImageView *rankView;
 
 - (id)initWithRank:(NSString *)theRank andSuit:(NSString *)theSuit;
 

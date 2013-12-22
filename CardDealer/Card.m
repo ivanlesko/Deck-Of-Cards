@@ -49,23 +49,26 @@
                                      labelHeight);
         
         self.suitLabel = [[UILabel alloc] initWithFrame:suitFrame];
-        self.suitLabel.backgroundColor = [UIColor redColor];
+        self.suitLabel.backgroundColor = [UIColor clearColor];
+        self.suitLabel.textColor       = [UIColor redColor];
+        self.suitLabel.textAlignment   = NSTextAlignmentCenter;
+        self.suitLabel.font            = [UIFont systemFontOfSize:140];
+        self.suitLabel.text = @"A";
         
             // Create the frame for the rank label and alloc/init it.
         
-        CGFloat rankRectYorigin = frame.size.height * 0.9;
+        CGFloat rankRectYorigin = frame.size.height * 0.9 - labelHeight;
         
-        CGRect labelFrame = CGRectMake(labelXorigin,
+        CGRect rankFrame = CGRectMake(labelXorigin,
                                        rankRectYorigin,
                                        labelWidth,
                                        labelHeight);
         
-        self.rankLabel = [[UILabel alloc] initWithFrame:labelFrame];
-//        self.rankLabel.layer.anchorPoint = CGPointMake(0, labelFrame.size.height);
-        self.rankLabel.backgroundColor = [UIColor redColor];
+        self.rankView = [[UIImageView alloc] initWithFrame:rankFrame];
+        self.rankView.backgroundColor = [UIColor redColor];
         
         [self addSubview:self.suitLabel];
-        [self addSubview:self.rankLabel];
+        [self addSubview:self.rankView];
     }
     
     return self;

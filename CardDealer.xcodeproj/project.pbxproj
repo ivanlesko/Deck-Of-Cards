@@ -23,6 +23,10 @@
 		4EFCFCCF1866605E00960DB3 /* CardDealerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCFCCE1866605E00960DB3 /* CardDealerTests.m */; };
 		4EFCFCDC1866608C00960DB3 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCFCD91866608C00960DB3 /* Deck.m */; };
 		4EFCFCDD1866608C00960DB3 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCFCDB1866608C00960DB3 /* Card.m */; };
+		4EFCFCE31867744900960DB3 /* rank_clubs.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCDF1867744900960DB3 /* rank_clubs.png */; };
+		4EFCFCE41867744900960DB3 /* rank_diamonds.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE01867744900960DB3 /* rank_diamonds.png */; };
+		4EFCFCE51867744900960DB3 /* rank_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE11867744900960DB3 /* rank_hearts.png */; };
+		4EFCFCE61867744900960DB3 /* rank_spades.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE21867744900960DB3 /* rank_spades.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,10 @@
 		4EFCFCD91866608C00960DB3 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
 		4EFCFCDA1866608C00960DB3 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		4EFCFCDB1866608C00960DB3 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		4EFCFCDF1867744900960DB3 /* rank_clubs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_clubs.png; sourceTree = "<group>"; };
+		4EFCFCE01867744900960DB3 /* rank_diamonds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_diamonds.png; sourceTree = "<group>"; };
+		4EFCFCE11867744900960DB3 /* rank_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_hearts.png; sourceTree = "<group>"; };
+		4EFCFCE21867744900960DB3 /* rank_spades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_spades.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +126,7 @@
 		4EFCFCA91866605E00960DB3 /* CardDealer */ = {
 			isa = PBXGroup;
 			children = (
+				4EFCFCDE1867743B00960DB3 /* Images */,
 				4EFCFCD81866608C00960DB3 /* Deck.h */,
 				4EFCFCD91866608C00960DB3 /* Deck.m */,
 				4EFCFCDA1866608C00960DB3 /* Card.h */,
@@ -160,6 +169,17 @@
 				4EFCFCCB1866605E00960DB3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4EFCFCDE1867743B00960DB3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4EFCFCDF1867744900960DB3 /* rank_clubs.png */,
+				4EFCFCE01867744900960DB3 /* rank_diamonds.png */,
+				4EFCFCE11867744900960DB3 /* rank_hearts.png */,
+				4EFCFCE21867744900960DB3 /* rank_spades.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,8 +260,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EFCFCBC1866605E00960DB3 /* Images.xcassets in Resources */,
+				4EFCFCE61867744900960DB3 /* rank_spades.png in Resources */,
+				4EFCFCE31867744900960DB3 /* rank_clubs.png in Resources */,
+				4EFCFCE51867744900960DB3 /* rank_hearts.png in Resources */,
 				4EFCFCAE1866605E00960DB3 /* InfoPlist.strings in Resources */,
 				4EFCFCB71866605E00960DB3 /* Main.storyboard in Resources */,
+				4EFCFCE41867744900960DB3 /* rank_diamonds.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +497,7 @@
 				4EFCFCD41866605E00960DB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4EFCFCD51866605E00960DB3 /* Build configuration list for PBXNativeTarget "CardDealerTests" */ = {
 			isa = XCConfigurationList;
@@ -481,6 +506,7 @@
 				4EFCFCD71866605E00960DB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C679AC5B-58C6-4B1C-8A33-FF314D825950</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CardDealer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BEB16B57-9750-493C-8C56-1BC11AF8AA32</key>
+		<string>https://github.com/ivanlesko/Deck-Of-Cards.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CardDealer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BEB16B57-9750-493C-8C56-1BC11AF8AA32</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ivanlesko/Deck-Of-Cards.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BEB16B57-9750-493C-8C56-1BC11AF8AA32</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BEB16B57-9750-493C-8C56-1BC11AF8AA32</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Deck Of Cards</string>
+		</dict>
+	</array>
+</dict>
+</plist>
