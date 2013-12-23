@@ -27,6 +27,12 @@
 		4EFCFCE41867744900960DB3 /* rank_diamonds.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE01867744900960DB3 /* rank_diamonds.png */; };
 		4EFCFCE51867744900960DB3 /* rank_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE11867744900960DB3 /* rank_hearts.png */; };
 		4EFCFCE61867744900960DB3 /* rank_spades.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE21867744900960DB3 /* rank_spades.png */; };
+		4EFCFCEA1867D44A00960DB3 /* CDSelectGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE81867D44A00960DB3 /* CDSelectGameViewController.m */; };
+		4EFCFCEB1867D44A00960DB3 /* CDSelectGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCE91867D44A00960DB3 /* CDSelectGameViewController.xib */; };
+		4EFCFCEF1867D5C700960DB3 /* CDDrawToHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCFCED1867D5C700960DB3 /* CDDrawToHandViewController.m */; };
+		4EFCFCF01867D5C700960DB3 /* CDDrawToHandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCEE1867D5C700960DB3 /* CDDrawToHandViewController.xib */; };
+		4EFCFCF41867D77300960DB3 /* CDNewCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCFCF21867D77300960DB3 /* CDNewCardViewController.m */; };
+		4EFCFCF51867D77300960DB3 /* CDNewCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFCFCF31867D77300960DB3 /* CDNewCardViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,15 @@
 		4EFCFCE01867744900960DB3 /* rank_diamonds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_diamonds.png; sourceTree = "<group>"; };
 		4EFCFCE11867744900960DB3 /* rank_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_hearts.png; sourceTree = "<group>"; };
 		4EFCFCE21867744900960DB3 /* rank_spades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_spades.png; sourceTree = "<group>"; };
+		4EFCFCE71867D44A00960DB3 /* CDSelectGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSelectGameViewController.h; sourceTree = "<group>"; };
+		4EFCFCE81867D44A00960DB3 /* CDSelectGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSelectGameViewController.m; sourceTree = "<group>"; };
+		4EFCFCE91867D44A00960DB3 /* CDSelectGameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CDSelectGameViewController.xib; sourceTree = "<group>"; };
+		4EFCFCEC1867D5C700960DB3 /* CDDrawToHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDrawToHandViewController.h; sourceTree = "<group>"; };
+		4EFCFCED1867D5C700960DB3 /* CDDrawToHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDrawToHandViewController.m; sourceTree = "<group>"; };
+		4EFCFCEE1867D5C700960DB3 /* CDDrawToHandViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CDDrawToHandViewController.xib; sourceTree = "<group>"; };
+		4EFCFCF11867D77300960DB3 /* CDNewCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDNewCardViewController.h; sourceTree = "<group>"; };
+		4EFCFCF21867D77300960DB3 /* CDNewCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDNewCardViewController.m; sourceTree = "<group>"; };
+		4EFCFCF31867D77300960DB3 /* CDNewCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CDNewCardViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +153,15 @@
 				4EFCFCB91866605E00960DB3 /* CDViewController.m */,
 				4EFCFCBB1866605E00960DB3 /* Images.xcassets */,
 				4EFCFCAA1866605E00960DB3 /* Supporting Files */,
+				4EFCFCE71867D44A00960DB3 /* CDSelectGameViewController.h */,
+				4EFCFCE81867D44A00960DB3 /* CDSelectGameViewController.m */,
+				4EFCFCE91867D44A00960DB3 /* CDSelectGameViewController.xib */,
+				4EFCFCEC1867D5C700960DB3 /* CDDrawToHandViewController.h */,
+				4EFCFCED1867D5C700960DB3 /* CDDrawToHandViewController.m */,
+				4EFCFCEE1867D5C700960DB3 /* CDDrawToHandViewController.xib */,
+				4EFCFCF11867D77300960DB3 /* CDNewCardViewController.h */,
+				4EFCFCF21867D77300960DB3 /* CDNewCardViewController.m */,
+				4EFCFCF31867D77300960DB3 /* CDNewCardViewController.xib */,
 			);
 			path = CardDealer;
 			sourceTree = "<group>";
@@ -266,6 +290,9 @@
 				4EFCFCAE1866605E00960DB3 /* InfoPlist.strings in Resources */,
 				4EFCFCB71866605E00960DB3 /* Main.storyboard in Resources */,
 				4EFCFCE41867744900960DB3 /* rank_diamonds.png in Resources */,
+				4EFCFCF01867D5C700960DB3 /* CDDrawToHandViewController.xib in Resources */,
+				4EFCFCF51867D77300960DB3 /* CDNewCardViewController.xib in Resources */,
+				4EFCFCEB1867D44A00960DB3 /* CDSelectGameViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,9 +312,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EFCFCDD1866608C00960DB3 /* Card.m in Sources */,
+				4EFCFCEA1867D44A00960DB3 /* CDSelectGameViewController.m in Sources */,
 				4EFCFCDC1866608C00960DB3 /* Deck.m in Sources */,
+				4EFCFCEF1867D5C700960DB3 /* CDDrawToHandViewController.m in Sources */,
 				4EFCFCB01866605E00960DB3 /* main.m in Sources */,
 				4EFCFCB41866605E00960DB3 /* CDAppDelegate.m in Sources */,
+				4EFCFCF41867D77300960DB3 /* CDNewCardViewController.m in Sources */,
 				4EFCFCBA1866605E00960DB3 /* CDViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
