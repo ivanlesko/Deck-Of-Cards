@@ -32,43 +32,54 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithRank:(NSString *)theRank andSuit:(NSString *)theSuit andFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         
-            // Create the frame for the suit label and alloc/init it.
-        CGFloat labelWidth   = 100;
-        CGFloat labelHeight  = 175;
-        CGFloat labelXorigin = (frame.size.width  / 2.0) - (labelWidth  / 2.0);
-        CGFloat suitRectYorigin = frame.size.height * .1;
+        self.rank = theRank;
+        self.suit = theSuit;
         
-        CGRect suitFrame = CGRectMake(labelXorigin,
-                                     suitRectYorigin,
-                                     labelWidth,
-                                     labelHeight);
+        self.backgroundColor = [UIColor whiteColor];
         
-        self.suitLabel = [[UILabel alloc] initWithFrame:suitFrame];
-        self.suitLabel.backgroundColor = [UIColor clearColor];
-        self.suitLabel.textColor       = [UIColor redColor];
-        self.suitLabel.textAlignment   = NSTextAlignmentCenter;
-        self.suitLabel.font            = [UIFont systemFontOfSize:140];
-        self.suitLabel.text = @"A";
+            // You only need to adjust the
         
-            // Create the frame for the rank label and alloc/init it.
+        // Create the frame for the suit label and alloc/init it.
+        CGFloat suitLabelXorigin = 0;
+        CGFloat suitLabelYorigin = frame.size.height * 0.15;
+        CGFloat suitLabelWidth   = frame.size.width;
+        CGFloat suitLabelHeight  = frame.size.height * 0.35;
         
-        CGFloat rankRectYorigin = frame.size.height * 0.9 - labelHeight;
+        CGRect suitFrame = CGRectMake(suitLabelXorigin,
+                                      suitLabelYorigin,
+                                      suitLabelWidth,
+                                      suitLabelHeight);
         
-        CGRect rankFrame = CGRectMake(labelXorigin,
-                                       rankRectYorigin,
-                                       labelWidth,
-                                       labelHeight);
+        self.rankLabel = [[UILabel alloc] initWithFrame:suitFrame];
+        self.rankLabel.backgroundColor = [UIColor clearColor];
+        self.rankLabel.textColor       = [UIColor redColor];
+        self.rankLabel.textAlignment   = NSTextAlignmentCenter;
+        self.rankLabel.font            = [UIFont systemFontOfSize:suitLabelHeight];
         
-        self.rankView = [[UIImageView alloc] initWithFrame:rankFrame];
-        self.rankView.backgroundColor = [UIColor redColor];
+        // Create the frame for the rank label and alloc/init it.
         
-        [self addSubview:self.suitLabel];
-        [self addSubview:self.rankView];
+        CGFloat rankLabelWidth   = suitLabelWidth;
+        CGFloat rankLabelHeight  = suitLabelHeight;
+        CGFloat rankLabelXorigin = suitLabelXorigin;
+        CGFloat rankLabelYorigin = suitLabelYorigin + suitLabelHeight;
+        
+        CGRect rankFrame = CGRectMake(rankLabelXorigin,
+                                      rankLabelYorigin,
+                                      rankLabelWidth,
+                                      rankLabelHeight);
+        
+        self.suitView = [[UIImageView alloc] initWithFrame:rankFrame];
+        self.suitView.backgroundColor = [UIColor clearColor];
+        self.suitView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        
+        [self addSubview:self.rankLabel];
+        [self addSubview:self.suitView];
     }
     
     return self;
@@ -83,14 +94,17 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    UIColor *whiteColor = [UIColor whiteColor];
-    UIColor *blackColor = [UIColor blackColor];
-    
-    CGContextSetFillColorWithColor(context, whiteColor.CGColor);
-    CGContextSetStrokeColorWithColor(context, blackColor.CGColor);
-
-    CGContextFillRect(context, rect);
-    CGContextStrokeRectWithWidth(context, rect, 4);
+    CGContextStrokeRectWithWidth(context, rect, 4.0);
 }
 
 @end
+
+
+
+
+
+
+
+
+
+

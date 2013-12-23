@@ -12,5 +12,15 @@
 #import "Card.h"
 
 @interface CDViewController : UIViewController
+{
+    NSDictionary *suitImages;
+    Card *currentCard;
+    Deck *deck;
+}
+
+- (void)configureSuitImages;
+- (void)configureNewCardButtonWithFrame:(CGRect)frame;
+
+- (void)newCard;
 
 @end
