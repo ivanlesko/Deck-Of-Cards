@@ -20,15 +20,21 @@
     CGRect  cardRect;
     CGPoint offScreenRightPosition;
     CGPoint offScreenLeftPosition;
+    
+    CGFloat cardSize;
 }
 
 - (void)configureSuitImages;
 - (void)configureNewCardButtonWithFrame:(CGRect)frame;
+- (void)configureCardPositions;
 
 - (void)newCard;
 
+- (void)revealCard;
 - (void)hideCard;
 
 - (IBAction)done:(id)sender;
+
+- (IBAction)moveLeft:(id)sender;
 
 @end

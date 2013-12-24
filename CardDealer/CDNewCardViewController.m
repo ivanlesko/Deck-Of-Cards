@@ -30,20 +30,8 @@
     deck = [[Deck alloc] init];
     
     [self configureSuitImages];
+    [self configureCardPositions];
     [self configureNewCardButtonWithFrame:self.view.bounds];
-    
-    CGFloat cardWidth   = self.view.layer.bounds.size.width   * 0.7;
-    CGFloat cardHeight  = self.view.layer.bounds.size.height  * 0.7;
-    CGFloat cardXorigin = (self.view.layer.bounds.size.width  / 2.0) - (cardWidth  / 2.0);
-    CGFloat cardYorigin = (self.view.layer.bounds.size.height / 2.0) - (cardHeight / 2.0);
-    
-    cardRect = CGRectMake(cardXorigin,
-                          cardYorigin,
-                          cardWidth,
-                          cardHeight);
-    
-    offScreenLeftPosition  = CGPointMake(cardXorigin - cardWidth, cardYorigin);
-    offScreenRightPosition = CGPointMake(cardXorigin + cardWidth, cardYorigin);
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,22 +77,39 @@
     [self.view addSubview:newCardButton];
 }
 
-- (void)newCard
+- (void)configureCardPositions
 {
-    [self hideCard];
+    cardSize = 0.7; // This variable will determine how wide the card appears in the view.
     
-    // Define some constants for the card frame.
-    CGFloat cardWidth   = self.view.layer.bounds.size.width   * 0.7;
-    CGFloat cardHeight  = self.view.layer.bounds.size.height  * 0.7;
+    CGFloat cardWidth   = self.view.layer.bounds.size.width   * cardSize;
+    CGFloat cardHeight  = self.view.layer.bounds.size.height  * cardSize;
     CGFloat cardXorigin = (self.view.layer.bounds.size.width  / 2.0) - (cardWidth  / 2.0);
     CGFloat cardYorigin = (self.view.layer.bounds.size.height / 2.0) - (cardHeight / 2.0);
     
-    CGRect cardRect = CGRectMake(cardXorigin, cardYorigin, cardWidth, cardHeight);
+    NSLog(@"cardXOrigin = %.0f", cardXorigin);
+    
+    cardRect = CGRectMake(cardXorigin,
+                          cardYorigin,
+                          cardWidth,
+                          cardHeight);
+    
+    NSLog(@"cardRectXorigin = %.0f", cardRect.origin.x);
+    
+    offScreenLeftPosition  = CGPointMake(cardXorigin - cardWidth, cardYorigin);
+    offScreenRightPosition = CGPointMake(cardXorigin + cardWidth, cardYorigin);
+}
+
+- (void)newCard
+{
+    if (currentCard)
+    {
+        [currentCard removeFromSuperview];
+        currentCard = nil;
+    }
     
     NSString *newRank = [deck.ranks objectAtIndex:arc4random_uniform([deck.ranks count])];
     NSString *newSuit = [deck.suits objectAtIndex:arc4random_uniform([deck.suits count])];
-    
-    NSLog(@"step 4");
+
     currentCard = [[Card alloc] initWithRank:newRank andSuit:newSuit andFrame:cardRect];
     currentCard.rankLabel.text = currentCard.rank;
     
@@ -147,72 +152,52 @@
     currentCard.suitView.image = [suitImages objectForKey:currentCard.suit];
     
     [self.view addSubview:currentCard];
+    
+    UIView *debugger = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    debugger.backgroundColor = [UIColor orangeColor];
+    debugger.layer.position  = CGPointMake(currentCard.layer.position.x, 0);
+    
+    [currentCard addSubview:debugger];
+    
+    [self revealCard];
+    
 }
 
 - (void)hideCard
 {
-    if (currentCard) {
-        
-        CABasicAnimation *hide = [CABasicAnimation animationWithKeyPath:@"position"];
-        hide.fromValue = [NSValue valueWithCGPoint:currentCard.layer.position];
-        hide.toValue   = [NSValue valueWithCGPoint:offScreenLeftPosition];
-        
-        CAAnimationGroup *anims = [CAAnimationGroup animation];
-        anims.animations = [NSArray arrayWithObjects:hide, nil];
-        anims.duration   = 1;
-        anims.speed      = 2;
-        anims.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        anims.fillMode   = kCAFillModeForwards;
-        anims.removedOnCompletion = NO;
-        
-        [currentCard.layer addAnimation:anims forKey:nil];
-        
-        currentCard.layer.position = hiddenPosition;
-        
-        CGPoint offScreenPositionRight = CGPointMake(self.view.bounds.size.width + currentCard.layer.bounds.size.width, currentCard.layer.position.y);
-        
-        CABasicAnimation *reveal = [CABasicAnimation animationWithKeyPath:@"position"];
-        reveal.fromValue = [NSValue valueWithCGPoint:offScreenPositionRight];
-        reveal.toValue   = [NSValue valueWithCGPoint:currentCard.layer.position];
-        
-        CAAnimationGroup *revealAnims = [CAAnimationGroup animation];
-        revealAnims.duration = 3;
-        revealAnims.fillMode = kCAFillModeForwards;
-        revealAnims.removedOnCompletion = NO;
-        
-        [currentCard.layer addAnimation:revealAnims forKey:nil];
-        
-        currentCard.layer.position = hiddenPosition;
-        currentCard = nil;
-        
-        NSLog(@"step 4");
-        
-    } else {
-        return;
-    }
+    
 }
 
-- (void)showCard
+- (void)revealCard
 {
-    CGPoint hiddenPosition = CGPointMake(self.view.bounds.size.width + currentCard.layer.bounds.size.width, currentCard.layer.position.y);
+    currentCard.layer.position = offScreenRightPosition;
     
     CABasicAnimation *reveal = [CABasicAnimation animationWithKeyPath:@"position"];
-    reveal.fromValue = [NSValue valueWithCGPoint:hiddenPosition];
-    reveal.toValue   = [NSValue valueWithCGPoint:currentCard.layer.position];
+    reveal.fromValue = [NSValue valueWithCGPoint:offScreenRightPosition];
+    reveal.toValue   = [NSValue valueWithCGPoint:CGPointMake(cardRect.origin.x, cardRect.origin.y)];
+    reveal.beginTime = 0;
+    reveal.duration  = 1;
     
     CAAnimationGroup *anims = [CAAnimationGroup animation];
-    anims.duration = 3;
-    anims.fillMode = kCAFillModeForwards;
+    anims.animations = [NSArray arrayWithObjects:reveal, nil];
+    anims.fillMode   = kCAFillModeForwards;
     anims.removedOnCompletion = NO;
     
     [currentCard.layer addAnimation:anims forKey:nil];
     
-    currentCard.layer.position = hiddenPosition;
+    /****** Left off here.  Need to figure out why the Y position of the card is moving *****/
+    currentCard.layer.position = CGPointMake(cardRect.origin.x, cardRect.origin.y);
+    
 }
 
 - (IBAction)done:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)moveLeft:(id)sender
+{
+    currentCard.layer.position = CGPointMake(currentCard.layer.position.x - 10, currentCard.layer.position.y);
 }
 
 @end
