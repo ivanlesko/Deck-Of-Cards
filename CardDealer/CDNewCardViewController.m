@@ -27,11 +27,11 @@
 {
     [super viewDidLoad];
     
-    deck = [[Deck alloc] init];
-    
-    [self configureSuitImages];
     [self configureCardPositions];
+    [self configureDeck];
     [self configureNewCardButtonWithFrame:self.view.bounds];
+    
+    cardCount.text = [NSString stringWithFormat:@"Cards: %d", deck.cards.count];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,14 +40,81 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)configureSuitImages
+- (void)configureDeck
 {
     // suitImages is a dictionary that contains key-value pairs of images for each suit.
-    
     suitImages = @{@"Clubs"    : [UIImage imageNamed:@"rank_clubs.png"],
                    @"Diamonds" : [UIImage imageNamed:@"rank_diamonds"],
                    @"Hearts"   : [UIImage imageNamed:@"rank_hearts"],
                    @"Spades"   : [UIImage imageNamed:@"rank_spades"]};
+    
+    deck = [[Deck alloc] init];
+    
+    // A rank counter used to iterate the for loop.
+    int rankCounter = 0;
+    
+    // This for loop runs 52 times.
+    // 13 times for each rank (Ace - King).
+    // 4 times for each suit (Clubs, Diamonds, Hearts, Spades).
+    for (int ranks = 0; ranks < deck.ranks.count; ranks ++) {
+        for (int suits = 0; suits < deck.suits.count; suits++) {
+            Card *aCard = [[Card alloc] initWithRank:[deck.ranks objectAtIndex:rankCounter] andSuit:[deck.suits objectAtIndex:suits] andFrame:cardRect];
+            aCard.rankLabel.text = aCard.rank;
+            aCard.suitView.image = [suitImages objectForKey:aCard.suit];
+            aCard.layer.anchorPoint = CGPointMake(0.5, 0.5);
+            
+            int firstCardRankIndex = [deck.ranks indexOfObjectIdenticalTo:aCard.rank];
+            switch (firstCardRankIndex) {
+                
+                    // If the card is an Ace.
+                case 0:
+                    aCard.rankLabel.text = @"A";
+                    break;
+                    
+                    // If the card is a Jack.
+                case 10:
+                    aCard.rankLabel.text = @"J";
+                    break;
+                    
+                    // If the card is a Queen.
+                case 11:
+                    aCard.rankLabel.text = @"Q";
+                    break;
+                    
+                    // If the card is a King.
+                case 12:
+                    aCard.rankLabel.text = @"K";
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            int firstCardSuitIndex = [deck.suits indexOfObjectIdenticalTo:aCard.suit];
+            if (firstCardSuitIndex == 0 || firstCardSuitIndex == 3) {
+                // If the card's rank is a Club or Spade, the rank color should be black to match the suit.
+                aCard.rankLabel.textColor = [UIColor blackColor];
+            } else {
+                // Otherwise, it should be red.
+                aCard.rankLabel.textColor = [UIColor redColor];
+            }
+            
+            aCard.layer.position = CGPointMake(aCard.layer.position.x + self.view.bounds.size.width,
+                                               aCard.layer.position.y);
+            
+            [deck addCardToDeck:aCard];
+        }
+        rankCounter++;
+    }
+    
+    newCardButton.enabled = YES;
+    
+    /******************************************************************
+     *********** REMEMBER TO IMPLEMENT THE DISCARD PILE ***************
+     *****************************************************************/
+    
+    // This discard pile will hold cards that are removed from the deck.
+    discardPile = [[Deck alloc] init];
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -64,9 +131,9 @@
                                     frame.size.width / 2.0,
                                     50);
     
-    UIButton *newCardButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    newCardButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     newCardButton.frame = newCardRect;
-    [newCardButton setTitle:@"New Card" forState:UIControlStateNormal];
+    [newCardButton setTitle:@"Draw Card" forState:UIControlStateNormal];
     newCardButton.titleLabel.font = [UIFont systemFontOfSize:30];
     
     [newCardButton addTarget:self
@@ -81,113 +148,106 @@
 {
     cardSize = 0.7; // This variable will determine how wide the card appears in the view.
     
-    CGFloat cardWidth   = self.view.layer.bounds.size.width   * cardSize;
+    cardWidth           = self.view.layer.bounds.size.width   * cardSize;
     CGFloat cardHeight  = self.view.layer.bounds.size.height  * cardSize;
     CGFloat cardXorigin = (self.view.layer.bounds.size.width  / 2.0) - (cardWidth  / 2.0);
     CGFloat cardYorigin = (self.view.layer.bounds.size.height / 2.0) - (cardHeight / 2.0);
-    
-    NSLog(@"cardXOrigin = %.0f", cardXorigin);
     
     cardRect = CGRectMake(cardXorigin,
                           cardYorigin,
                           cardWidth,
                           cardHeight);
-    
-    NSLog(@"cardRectXorigin = %.0f", cardRect.origin.x);
-    
-    offScreenLeftPosition  = CGPointMake(cardXorigin - cardWidth, cardYorigin);
-    offScreenRightPosition = CGPointMake(cardXorigin + cardWidth, cardYorigin);
 }
 
 - (void)newCard
 {
-    if (currentCard)
-    {
-        [currentCard removeFromSuperview];
-        currentCard = nil;
+    // Only display a new card if the deck is not empty.
+    if (deck.cards.count != 0) {
+        // If only the second card exists
+        if (!firstCard && secondCard) {
+            [self moveCardLeft:secondCard];
+            secondCardMoves++;
+            
+            firstCard = [[deck cards] objectAtIndex:arc4random_uniform(deck.cards.count)];
+            [[deck cards] removeObject:firstCard];
+            
+            [self.view addSubview:firstCard];
+            [self moveCardLeft:firstCard];
+            firstCardMoves++;
+        }
+    
+        // If the first card exists, but the second one does not.
+        // Create the second one
+        if (firstCard && !secondCard) {
+            secondCard = [[deck cards] objectAtIndex:arc4random_uniform(deck.cards.count)];
+            [[deck cards] removeObject:secondCard];
+            
+            // Move the second card into view.
+            [self.view addSubview:secondCard];
+            [self moveCardLeft:secondCard];
+            secondCardMoves++;
+            
+            // Also move the first rectangle out of view
+            [self moveCardLeft:firstCard];
+            firstCardMoves++;
+        }
+    
+        // If no card exists on the screen yet
+        // Create the first one and push it to the left.
+        if (!firstCard && !secondCard) {
+            firstCard = [[deck cards] objectAtIndex:arc4random_uniform(deck.cards.count)];
+            [[deck cards] removeObject:firstCard];
+            
+            [self.view addSubview:firstCard];
+            [self moveCardLeft:firstCard];
+            firstCardMoves++;
+        }
     }
     
-    NSString *newRank = [deck.ranks objectAtIndex:arc4random_uniform([deck.ranks count])];
-    NSString *newSuit = [deck.suits objectAtIndex:arc4random_uniform([deck.suits count])];
-
-    currentCard = [[Card alloc] initWithRank:newRank andSuit:newSuit andFrame:cardRect];
-    currentCard.rankLabel.text = currentCard.rank;
+    cardCount.text = [NSString stringWithFormat:@"Cards: %d", deck.cards.count];
     
-    int rankIndex = [deck.ranks indexOfObjectIdenticalTo:currentCard.rank];
-    switch (rankIndex) {
-            
-            // If the card is an Ace.
-        case 0:
-            currentCard.rankLabel.text = @"A";
-            break;
-            
-            // If the card is a Jack.
-        case 10:
-            currentCard.rankLabel.text = @"J";
-            break;
-            
-            // If the card is a Queen.
-        case 11:
-            currentCard.rankLabel.text = @"Q";
-            break;
-            
-            // If the card is a King.
-        case 12:
-            currentCard.rankLabel.text = @"K";
-            break;
-            
-        default:
-            break;
+    newCardButton.enabled = NO;
+    
+    if (deck.cards.count == 0) {
+        [self configureDeck];
     }
-    
-    int suitIndex = [deck.suits indexOfObjectIdenticalTo:currentCard.suit];
-    if (suitIndex == 0 || suitIndex == 3) {
-        // If the card's rank is a Club or Spade, the rank color should be black to match the suit.
-        currentCard.rankLabel.textColor = [UIColor blackColor];
-    } else {
-        // Otherwise, it should be red.
-        currentCard.rankLabel.textColor = [UIColor redColor];
-    }
-    
-    currentCard.suitView.image = [suitImages objectForKey:currentCard.suit];
-    
-    [self.view addSubview:currentCard];
-    
-    UIView *debugger = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
-    debugger.backgroundColor = [UIColor orangeColor];
-    debugger.layer.position  = CGPointMake(currentCard.layer.position.x, 0);
-    
-    [currentCard addSubview:debugger];
-    
-    [self revealCard];
-    
 }
 
-- (void)hideCard
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
+    newCardButton.enabled = YES;
     
+    if (firstCardMoves == 2) {
+        [firstCard removeFromSuperview];
+        firstCard = nil;
+        firstCardMoves = 0;
+    }
+    
+    if (secondCardMoves == 2) {
+        [secondCard removeFromSuperview];
+        secondCard = nil;
+        secondCardMoves = 0;
+    }
 }
 
-- (void)revealCard
+- (void)moveCardLeft:(UIView *)theView
 {
-    currentCard.layer.position = offScreenRightPosition;
+    CGPoint newPos = CGPointMake(theView.layer.position.x - self.view.bounds.size.width, theView.layer.position.y);
     
-    CABasicAnimation *reveal = [CABasicAnimation animationWithKeyPath:@"position"];
-    reveal.fromValue = [NSValue valueWithCGPoint:offScreenRightPosition];
-    reveal.toValue   = [NSValue valueWithCGPoint:CGPointMake(cardRect.origin.x, cardRect.origin.y)];
-    reveal.beginTime = 0;
-    reveal.duration  = 1;
+    CABasicAnimation *moveLeft = [CABasicAnimation animationWithKeyPath:@"position"];
+    moveLeft.delegate  = self;
+    moveLeft.fromValue = [NSValue valueWithCGPoint:theView.layer.position];
+    moveLeft.toValue   = [NSValue valueWithCGPoint:newPos];
+    moveLeft.beginTime = 0;
+    moveLeft.duration  = 1;
+    moveLeft.speed     = 3;
+    moveLeft.fillMode  = kCAFillModeBackwards;
+    moveLeft.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    moveLeft.removedOnCompletion = NO;
     
-    CAAnimationGroup *anims = [CAAnimationGroup animation];
-    anims.animations = [NSArray arrayWithObjects:reveal, nil];
-    anims.fillMode   = kCAFillModeForwards;
-    anims.removedOnCompletion = NO;
+    [theView.layer addAnimation:moveLeft forKey:nil];
     
-    [currentCard.layer addAnimation:anims forKey:nil];
-    
-    /****** Left off here.  Need to figure out why the Y position of the card is moving *****/
-    currentCard.layer.position = CGPointMake(cardRect.origin.x, cardRect.origin.y);
-    
+    theView.layer.position = newPos;
 }
 
 - (IBAction)done:(id)sender
@@ -197,7 +257,7 @@
 
 - (IBAction)moveLeft:(id)sender
 {
-    currentCard.layer.position = CGPointMake(currentCard.layer.position.x - 10, currentCard.layer.position.y);
+    firstCard.layer.position = CGPointMake(firstCard.layer.position.x - 40, firstCard.layer.position.y);
 }
 
 @end

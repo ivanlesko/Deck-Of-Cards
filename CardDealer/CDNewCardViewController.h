@@ -14,24 +14,30 @@
 @interface CDNewCardViewController : UIViewController
 {
     NSDictionary *suitImages;
-    Card *currentCard;
     Deck *deck;
     
-    CGRect  cardRect;
-    CGPoint offScreenRightPosition;
-    CGPoint offScreenLeftPosition;
+    Deck *discardPile;
     
+    CGRect  cardRect;
     CGFloat cardSize;
+    CGFloat cardWidth;
+    
+    Card *firstCard;
+    int firstCardMoves;
+    
+    Card *secondCard;
+    int secondCardMoves;
+    
+    UIButton *newCardButton;
+    
+    __weak IBOutlet UILabel *cardCount;
 }
 
-- (void)configureSuitImages;
+- (void)configureDeck;
 - (void)configureNewCardButtonWithFrame:(CGRect)frame;
 - (void)configureCardPositions;
 
 - (void)newCard;
-
-- (void)revealCard;
-- (void)hideCard;
 
 - (IBAction)done:(id)sender;
 
